@@ -15,8 +15,15 @@ function validLogin(email, password)
         if(Account.length > 0)
         {        
             Account = Account[0];
-            if(fw.utils.getMD5(password+Account.Salt) == Account.Password)
-                resolve(Account);
+            console.log(Account,password,Account.Salt);
+            console.log(fw.utils.getMD5(password+Account.Salt));
+            console.log(fw.utils.getMD5(password+Account.Salt));
+            if(fw.utils.getMD5(password+Account.Salt) === Account.password)
+                {
+                    console.log('El combo de los super pequenines');
+                    resolve(Account);
+                }
+                
         }
         
         resolve(false);

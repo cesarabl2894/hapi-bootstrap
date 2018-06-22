@@ -37,7 +37,7 @@ function getUserbyEmail(email)
     {
         const SQL = 
         `SELECT * FROM Users
-        WHERE UPPER(Email) LIKE ?`;
+        WHERE email LIKE ?`;
         resolve(await fw.db.execute('local',SQL,[`%${email.toUpperCase()}%`]));
     });    
 }
