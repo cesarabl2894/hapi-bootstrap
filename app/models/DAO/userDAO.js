@@ -31,14 +31,12 @@ function getUser(id)
     });
 }
 
-function getUserbyEmail(email)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
+function getUserbyEmail(email){
+    return fw.promise(async (resolve,reject) => {
         const SQL = 
         `SELECT * FROM Users
         WHERE email LIKE ?`;
-        resolve(await fw.db.execute('local',SQL,[`%${email.toUpperCase()}%`]));
+        resolve(await fw.db.execute('local',SQL,[`%${email}%`]));
     });    
 }
 

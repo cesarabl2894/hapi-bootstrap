@@ -4,13 +4,11 @@ const uuid = require('uuid/v1');
 const crypto = require('crypto');
 const dateformat = require('dateformat');
 
-function getMD5(data)
-{
+function getMD5(data) {
     return crypto.createHash('md5').update(data).digest("hex");
 }
 
-function getUUID()
-{
+function getUUID() {
     return uuid();
 }
 
@@ -68,6 +66,11 @@ function isUndefined(arg) {
     return typeof arg === 'undefined';
 };
 
+function encrypt(algorithm ,data){
+    return crypto.createHmac(algorithm, fw.settings.EncryptionKey)
+        .update(data)
+        .digest('hex');
+}
 module.exports = {
     getMD5,
     getUUID,
@@ -82,5 +85,6 @@ module.exports = {
     isPromise,
     isDefined,
     isUndefined,
-    dateformat
+    dateformat,
+    encrypt
 };

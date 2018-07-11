@@ -6,11 +6,15 @@ const Hapi  = require('hapi');
 
 const server = new Hapi.Server({
     port: process.env.PORT || 3030,
-    host: process.env.HOST || 'localhost'
+    host: process.env.HOST || 'localhost',
+    routes: 
+    {
+        cors: true 
+    }
 });
 
-function getRoutes()
-{
+
+function getRoutes(){
     let routesPaths = fw.utils.getFiles('routes/**/*.js', true);
     let routes = [];
 
@@ -19,17 +23,16 @@ function getRoutes()
         for(let r of routesPaths )
             routes.push(require(r));
     }
-
+    
+    console.log(routes);
     return routes;
 }
 
-function getPlugins() 
-{
+function getPlugins() {
     let pluginsPaths = fw.utils.getFiles('sys/Plugins/**/*.js', true);
     let plugins = [];
 
-    if (fw.utils.isArray(pluginsPaths)) 
-    {
+    if (fw.utils.isArray(pluginsPaths)) {
         for (let p of pluginsPaths)
             plugins.push(require(p));
     }
@@ -47,9 +50,11 @@ async function start(){
         for (let plugin of getPlugins())
             await plugin(server);
 
-        for(let route of getRoutes())
+        const routes = getRoutes();
+        for(let route of routes)
             server.route(route);
         
+        console.log(server.routes);
         fw.Handlebars = require('handlebars');
         
         server.views({

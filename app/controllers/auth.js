@@ -18,8 +18,7 @@ function render(request, h)
     });
 }
 
-function login(request,h)
-{
+function login(request,h){
     return fw.promise(async (resolve,reject) => 
     {
         let stResponse = {success:false,message:''};
@@ -32,13 +31,10 @@ function login(request,h)
         }
             
         const Account = await userService.validLogin(request.payload.email,request.payload.password);
-        if(!Account)
-        {
+        if(!Account) {
             stResponse.success = false;
             stResponse.message = 'Invalid Credentials';
-        }
-        else
-        {
+        }else {
             stResponse.success = true;
             //Create UUID
             const jsid = fw.utils.getUUID();
@@ -59,8 +55,7 @@ function login(request,h)
 }
 
 
-function logout(request, h)
-{
+function logout(request, h){
     request.server.app.cache.drop(request.state['jsid'].jsid);
     request.cookieAuth.clear();
     return h.redirect('/');

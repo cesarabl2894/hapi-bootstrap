@@ -40,8 +40,7 @@ function getUsers()
 
 function getUserbyEmail(email)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
+    return fw.promise(async (resolve,reject) => {
         resolve(await userDAO.getUserbyEmail(email));
     });
 }

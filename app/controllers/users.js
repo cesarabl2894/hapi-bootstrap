@@ -2,92 +2,6 @@
 // Dependencies
 //====================
 const usersService = fw.getService('user');
-const rolesService = fw.getService('roles');
-const departmentsService = fw.getService('departments');
-
-/**
- * Render Main page
- * @param {Object} request
- * @param {Object} h 
- */
-function renderMain(request,h)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
-        const users = await usersService.getUsers();
-        resolve(h.view('views/users/main', {users, session: request.auth.credentials}));
-    });    
-}
-
-/**
- * Render View page
- * @param {Object} request
- * @param {Object} h 
- */
-function renderView(request,h)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
-        const user = await usersService.getUser(request.query.id);
-        
-        if(user.length != 1)
-        {
-            resolve(h.redirect('/users'));
-            return;
-        }
-
-        resolve(h.view('views/users/view', {user:user[0], session: request.auth.credentials}));
-    });
-    
-}
-
-/**
- * Render Edit page
- * @param {Object} request
- * @param {Object} h 
- */
-function renderEdit(request,h)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
-        const user = await usersService.getUser(request.query.id);
-        
-        if(user.length != 1)
-        {
-            resolve(h.redirect('/users'));
-            return;
-        }
-
-        resolve(h.view('views/users/edit', 
-        {
-            user:user[0],
-            roles: await rolesService.getRoles(),
-            departments: await departmentsService.getDepartments(), 
-            session: request.auth.credentials
-        }));
-    });
-    
-}
-
-/**
- * Render Add page
- * @param {Object} request
- * @param {Object} h 
- */
-function renderAdd(request,h)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(h.view('views/users/add', 
-        {
-            roles: await rolesService.getRoles(),
-            departments: await departmentsService.getDepartments(), 
-            session: request.auth.credentials
-        }));
-    });
-    
-}
-
 
 function addUser(request, h)
 {
@@ -187,10 +101,6 @@ function deleteUser(request, h)
 
 module.exports = 
 {
-    renderMain,
-    renderView,
-    renderEdit,
-    renderAdd,
     addUser,
     editUser,
     deleteUser
