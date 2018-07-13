@@ -54,26 +54,7 @@ async function start(){
         for(let route of routes)
             server.route(route);
         
-        console.log(server.routes);
         fw.Handlebars = require('handlebars');
-        
-        server.views({
-            engines: 
-            {
-                hbs: 
-                {
-                    module: fw.Handlebars,
-                    compileMode: 'sync' // engine specific
-                }
-            },
-            relativeTo: __dirname,
-            compileMode: 'async',
-            path: '../templates',
-            layout: 'default.layout',
-            partialsPath: '../templates/partials',
-            layoutPath: '../templates/layouts',
-            helpersPath: '../templates/helpers'
-        });
         
         // Start server
         await server.start();

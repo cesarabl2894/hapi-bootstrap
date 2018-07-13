@@ -11,22 +11,18 @@ async function checkAuth(data){
     const users = await userService.getUserbyEmail(data.email);
     const user = await fw.lodash.find(users,{email: data.email});
 
-    console.log(user);
     //Check if search return a valid user
     if(user){
-        // console.log('Entering Condition');
         //Encrypt Password and check if match
         const hashPassword = fw.utils.encrypt('SHA256', data.password + user.Salt);
         // console.log(hashPassword);
         if (hashPassword === user.password) {
             //Check if user still active
             console.log('Logged');
-            //Return valid token
             return await createToken(fw.lodash.omit(user, ['Salt', 'password']));
-            // console.log(`Token created,welcome to Our API`);
         }
     }
-    return fw.boom.unauthorized('Invalid Login');
+    return fw.boom.unauthorized('Invalid Credentials');
 }
 
 

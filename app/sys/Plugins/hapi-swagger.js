@@ -9,7 +9,8 @@ const swaggerConfig = {
             title: packageInfo.name,
             version: packageInfo.version
         },
-        auth: 'simple'
+        auth: 'simple',
+        documentationPath: '/'
     }
 };
 
