@@ -40,24 +40,18 @@ function getUserbyEmail(email){
     });    
 }
 
-function addUser(data)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
+function addUser(data){
+    return fw.promise(async (resolve,reject) => {
         const SQL = 
-        `INSERT INTO Users(Name,Salary,StartingDate,Email,Password,DepartmentId,RoleId,Salt)
-        VALUES
-        (?,?,?,?,?,?,?,?)`;
+        `INSERT INTO users(username, email,password,Salt,usertypeid)
+        VALUES (?,?,?,?,?);`;
         resolve(await fw.db.execute('local',SQL,
         [
-            data.Name,
-            data.Salary, 
-            data.StartingDate, 
-            data.Email, 
-            data.Password,
-            data.DepartmentId, 
-            data.RoleId,
-            data.Salt
+            data.username,
+            data.email, 
+            data.password, 
+            data.Salt,
+            data.usertypeid
         ]));
     });    
 }
@@ -86,14 +80,13 @@ function updateUser(data)
     });    
 }
 
-function deleteUser(id)
-{
+function deleteUser(email){
     return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
-        `DELETE FROM Users
-        WHERE ID = ?`;
-        resolve(await fw.db.execute('local',SQL,[id]));
+        `DELETE FROM users
+        WHERE email = ?`;
+        resolve(await fw.db.execute('local',SQL,[email]));
     });
 }
 

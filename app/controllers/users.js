@@ -3,14 +3,12 @@
 //====================
 const usersService = fw.getService('user');
 
-function addUser(request, h)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
+function addUser(request, h) {
+    return fw.promise(async (resolve,reject) => {
         let stResponse = {success:false,message:''};
         const user = await usersService.getUserbyEmail(request.payload.email);
-        if(user.length > 0)
-        {
+        console.log(request.payload.email);
+        if(user.length > 0) {
             stResponse.message = "User already exist";
             resolve(stResponse);
             return;
@@ -18,20 +16,16 @@ function addUser(request, h)
 
 
         const salt = fw.utils.getUUID();
-        const hashPassword = fw.utils.getMD5(request.payload.password + salt);
+        const hashPassword = fw.utils.encrypt('SHA256',request.payload.password + salt);
 
-        const Params = 
-        {
-            Name: request.payload.name,
-            Password: hashPassword,
+        const Params =  {
+            username: request.payload.username,
+            password: hashPassword,
             Salt: salt,
-            Salary: request.payload.salary, 
-            StartingDate: request.payload.startingdate, 
-            Email: request.payload.email, 
-            DepartmentId: request.payload.departmentid, 
-            RoleId: request.payload.roleid
+            email: request.payload.email,
+            usertypeid: request.payload.usertypeid
         }
-    
+        console.log(Params);
         await usersService.addUser(Params);
         stResponse.success = true;
         resolve(stResponse);                    
@@ -80,12 +74,10 @@ function editUser(request, h)
     });    
 }
 
-function deleteUser(request, h)
-{
-    return fw.promise(async (resolve,reject) => 
-    {
+function deleteUser(request, h){
+    return fw.promise(async (resolve,reject) => {
         let stResponse = {success:false,message:''};
-        const user = await usersService.getUser(request.payload.userid);
+        const user = await usersService.getUserbyEmail(request.payload.email);
         if(user.length != 1)
         {
             stResponse.message = "User does not exist";
@@ -93,7 +85,7 @@ function deleteUser(request, h)
             return;
         }
 
-        await usersService.deleteUser(request.payload.userid);
+        await usersService.deleteUser(request.payload.email);
         stResponse.success = true;
         resolve(stResponse);        
     });    

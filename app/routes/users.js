@@ -10,15 +10,11 @@ module.exports =
         tags: ['api'],
         validate: 
         {
-            payload: 
-            {
-                name:         fw.param.string().required(),
-                password:     fw.param.string().required(),
-                salary:       fw.param.number().required(),
-                startingdate: fw.param.string().required(),
-                email:        fw.param.string().required(),
-                departmentid: fw.param.string().required(),
-                roleid:       fw.param.string().required()
+            payload: {
+              username:     fw.param.string().required(),
+              email:        fw.param.string().required(),
+              password:     fw.param.string().required(),
+              usertypeid:   fw.param.number().integer().required()
             }
         }                
       },
@@ -32,7 +28,7 @@ module.exports =
         {
           payload: 
           {
-              userid:       fw.param.number().required(),
+            email:  fw.param.string().required(),
           }        
         }        
       } 

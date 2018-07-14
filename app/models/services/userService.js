@@ -45,8 +45,7 @@ function getUserbyEmail(email)
     });
 }
 
-function getUser(id)
-{
+function getUser(id){
     return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.getUser(id));
@@ -55,8 +54,7 @@ function getUser(id)
 
 function addUser(data)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
+    return fw.promise(async (resolve,reject) => {
         resolve(await userDAO.addUser(data));
     });    
 }
@@ -69,8 +67,7 @@ function updateUser(data)
     });    
 }
 
-function deleteUser(data)
-{
+function deleteUser(data){
     return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.deleteUser(data));
