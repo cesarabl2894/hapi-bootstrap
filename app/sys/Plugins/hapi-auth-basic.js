@@ -1,9 +1,6 @@
 'use strict';
 
-const devuser = {
-    username: 'newmedia',
-    password: 'unique' 
-};
+const devuser = fw.settings.AuthCredentials;
 
 const validate = async (request, username, password, h) => {
 

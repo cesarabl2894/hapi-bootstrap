@@ -20,10 +20,11 @@ module.exports =
       },
   },
   { 
-    method: 'POST', path: '/users/delete', 
+    method: 'DELETE', path: '/users/delete', 
       options: { 
         handler: UsersCtrl.deleteUser, 
         tags: ['api'],
+        auth: 'jwt',
         validate: 
         {
           payload: 

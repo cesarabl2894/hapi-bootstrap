@@ -1,5 +1,4 @@
-class mysqlAdapter 
-{
+class mysqlAdapter {
     constructor(config)
     {
         this.dbconfig = config;
@@ -8,8 +7,7 @@ class mysqlAdapter
     }
 
 
-    async createConnection()
-    {
+    async createConnection() {
         return await this.mysql.createConnection
         ({
             host: this.dbconfig.SERVER,
@@ -20,15 +18,13 @@ class mysqlAdapter
     }
 
 
-    async execute(sql,options)
-    {
+    async execute(sql,options) {
         this.conn = this.conn || await this.createConnection();
         return await this.conn.query(sql,options);
     }
 
 
-    async close()
-    {
+    async close(){
         await this.conn.end();
     }
 }

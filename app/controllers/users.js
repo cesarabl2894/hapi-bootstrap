@@ -9,7 +9,7 @@ function addUser(request, h) {
         const user = await usersService.getUserbyEmail(request.payload.email);
         console.log(request.payload.email);
         if(user.length > 0) {
-            stResponse.message = "User already exist";
+            stResponse.message = "Usuario existente con correo electronico";
             resolve(stResponse);
             return;
         }
@@ -27,6 +27,7 @@ function addUser(request, h) {
         }
         console.log(Params);
         await usersService.addUser(Params);
+        stResponse.message = "Se ha registrado Correctamente"
         stResponse.success = true;
         resolve(stResponse);                    
     });    

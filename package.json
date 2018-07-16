@@ -1,13 +1,14 @@
 {
   "name": "hapitest",
   "version": "0.1.0",
-  "description": "",
+  "description": "This is a Hapi Structure for API enpoints, this project was forked , and the creator of the Structure is Mario Nuñez, mar-hn",
   "main": "server.js",
   "scripts": {
-    "startdev": "nodemon -e js,jade,html,hbs ./app/sys/server.js",
+    "startdev": "nodemon  ./app/sys/server.js",
+    "startdebug" : "nodemon --inspect-brk ./app/sys/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mario Nuñez",
+  "author": "Cesar Bonel",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
