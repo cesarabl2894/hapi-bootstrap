@@ -2,7 +2,7 @@ const userService = fw.getService('user');
 const jwt = require('jsonwebtoken');
 
 async function createToken(obj) {
-    console.log('Creating Token:');
+    console.log('Token Created:');
     return await jwt.sign(obj, fw.settings.SessionKey, { algorithm: 'HS256', expiresIn: "4h" });
 }
 
@@ -10,8 +10,6 @@ async function createToken(obj) {
 async function checkAuth(data){
     const users = await userService.getUserbyEmail(data.email);
     const user = await fw.lodash.find(users,{email: data.email});
-    console.log(users);
-    console.log(data);
 
     //Check if search return a valid user
     if(user){

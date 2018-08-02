@@ -2,7 +2,6 @@ const UsersCtrl = fw.getController('users');
 
 module.exports = 
 [
-  // { method: 'GET', path: '/users/add', options: { handler: UsersCtrl.renderAdd } },
   { method: 'POST', path: '/users/add', 
       options: 
       { 
@@ -31,7 +30,32 @@ module.exports =
           {
             email:  fw.param.string().required(),
           }        
-        }        
-      } 
+      }        
+     } 
+  },
+  {
+    method: 'GET',
+    path: '/users/all',
+    options: {
+      handler: UsersCtrl.getUsers,
+      auth: 'jwt',
+      tags: ['api']
+
+    }
+  },
+  {
+    method:'PUT',
+    path: '/users/changepass',
+    options: {
+      handler : UsersCtrl.updatePassword,
+      auth: 'jwt',
+      tags: ['api'],
+      validate:{
+        payload:{
+          email: fw.param.string().required(),
+          password: fw.param.string().required()
+        }
+      }
+    }
   }
 ];

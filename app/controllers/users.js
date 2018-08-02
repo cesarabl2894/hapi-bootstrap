@@ -5,11 +5,11 @@ const usersService = fw.getService('user');
 
 function addUser(request, h) {
     return fw.promise(async (resolve,reject) => {
+        // console.log(request.payload);
         let stResponse = {success:false,message:''};
         const user = await usersService.getUserbyEmail(request.payload.email);
-        console.log(request.payload.email);
         if(user.length > 0) {
-            stResponse.message = "Usuario existente con correo electronico";
+            stResponse.message = "Correo Electronico ya registrado";
             resolve(stResponse);
             return;
         }
@@ -17,7 +17,7 @@ function addUser(request, h) {
 
         const salt = fw.utils.getUUID();
         const hashPassword = fw.utils.encrypt('SHA256',request.payload.password + salt);
-
+        
         const Params =  {
             username: request.payload.username,
             password: hashPassword,
@@ -25,7 +25,6 @@ function addUser(request, h) {
             email: request.payload.email,
             usertypeid: request.payload.usertypeid
         }
-        console.log(Params);
         await usersService.addUser(Params);
         stResponse.message = "Se ha registrado Correctamente"
         stResponse.success = true;
@@ -33,9 +32,13 @@ function addUser(request, h) {
     });    
 }
 
+function getUsers(request,h){
+    return fw.promise(async (resolve,reject) =>{
+        resolve (await usersService.getUsers());
+    })
+}
 
-function editUser(request, h)
-{
+function editUser(request, h){
     return fw.promise(async (resolve,reject) => 
     {
         let stResponse = {success:false,message:''};
@@ -79,22 +82,55 @@ function deleteUser(request, h){
     return fw.promise(async (resolve,reject) => {
         let stResponse = {success:false,message:''};
         const user = await usersService.getUserbyEmail(request.payload.email);
-        if(user.length != 1)
-        {
-            stResponse.message = "User does not exist";
+        if(user.length != 1) {
+            stResponse.message = "Usuario no existe";
             resolve(stResponse);
             return;
         }
 
         await usersService.deleteUser(request.payload.email);
         stResponse.success = true;
+        stResponse.message = "Usuario eliminado correctamente";
         resolve(stResponse);        
     });    
+}
+
+function updatePassword(request,h){
+    return fw.promise(async (resolve,reject)=>{
+        
+        const user = await usersService.getUserbyEmail(request.payload.email);
+        let stResponse = {success:false,message:''};
+
+        const salt = fw.utils.getUUID();
+
+        if(user.length != 1 ){
+            stResponse.message = "Usuario no registrado";
+            resolve(stResponse);
+            return;
+
+        }
+
+        const hashPassword = fw.utils.encrypt('SHA256',request.payload.password + salt);
+
+        const Params = {
+            password: hashPassword,
+            Salt: salt,
+            email: request.payload.email,
+        }
+
+        await usersService.updatePassword(Params);
+        stResponse.message = 'Se ha actualizado Contrasena';
+        stResponse.success = true;
+
+        resolve(stResponse);
+    });
 }
 
 module.exports = 
 {
     addUser,
     editUser,
-    deleteUser
+    getUsers,
+    deleteUser,
+    updatePassword
 }

@@ -11,12 +11,6 @@ const userService = fw.getService('user');
  * @param {Object} request
  * @param {Object} header
  */
-function render(request, h) 
-{
-    return new Promise(async function (resolve, reject) {
-        resolve(h.view('views/login', { title: 'Login' }, {layout: 'login.layout'}));
-    });
-}
 
 function login(request,h){
     return fw.promise(async (resolve,reject) => 
@@ -63,7 +57,6 @@ function logout(request, h){
 
 module.exports =
 {
-    render: render,
     login: login,
     logout: logout
 }

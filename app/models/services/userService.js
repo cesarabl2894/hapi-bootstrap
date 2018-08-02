@@ -30,10 +30,8 @@ function validLogin(email, password)
     })
 }
 
-function getUsers()
-{
-    return fw.promise(async (resolve,reject) => 
-    {
+function getUsers(){
+    return fw.promise(async (resolve,reject) =>     {
         resolve(await userDAO.getUsers());
     });
 }
@@ -74,15 +72,19 @@ function deleteUser(data){
     });    
 }
 
+function updatePassword(data) {
+    return fw.promise(async (resolve,reject) =>{
+        await resolve(userDAO.updatePassword(data));
+    });
+}
 
-
-module.exports = 
-{
+module.exports = {
     validLogin,
     getUsers,
     getUser,
     getUserbyEmail,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    updatePassword
 }

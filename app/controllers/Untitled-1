@@ -1,0 +1,23 @@
+{
+  "idpaciente": 2,
+  "nombre": "Cesar",
+  "apellido": "Bonel",
+  "email": "cbonel@sanservices.hn",
+  "sexo": "M",
+  "direccion": "Barrio San Cristobal",
+  "password": "sandals01",
+  "username" : "cbonel",
+  "usertypeid": 1
+}
+
+{
+  "nombre": "Cesar",
+  "apellido": "Bonel",
+  "email": "cbonel@sanservices.hn",
+  "sexo": "M",
+  "direccion": "Barrio San Cristobal",
+  "password": "sandals01",
+  "departamentoid": 5,
+  "ciudadid": 501,
+  "username": "string"
+}
