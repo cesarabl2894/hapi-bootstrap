@@ -2,7 +2,7 @@
 
 require('./fw');
 // if(process.env === 'development'){
-//     require('dotenv').config();
+    require('dotenv').config();
 // }
 
 const Hapi  = require('hapi');
