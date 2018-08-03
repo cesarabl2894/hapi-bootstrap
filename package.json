@@ -8,7 +8,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "node  ./app/sys/server.js",
+    "start": "nodemon ./app/sys/server.js",
     "startdev": "nodemon  ./app/sys/server.js",
     "startdebug" : "nodemon --inspect-brk ./app/sys/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
