@@ -2,8 +2,13 @@
   "name": "hapitest",
   "version": "0.1.0",
   "description": "This is a Hapi Structure for API enpoints, this project was forked , and the creator of the Structure is Mario Nuñez, mar-hn",
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.6.x"
+  },
   "main": "server.js",
   "scripts": {
+    "start": "node  ./app/sys/server.js",
     "startdev": "nodemon  ./app/sys/server.js",
     "startdebug" : "nodemon --inspect-brk ./app/sys/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
