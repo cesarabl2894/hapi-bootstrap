@@ -29,7 +29,6 @@ function addMedico(request, h){
             
         }
         const userReg = await userCtrl.addUser(userRequest);
-        console.log(userReg);
         if(userReg.success){
             const {username , email} = userRequest.payload;
             const Params = {
@@ -43,7 +42,6 @@ function addMedico(request, h){
                 estado: request.payload.estado,            
                 username: username,               
             };
-            console.log('Enter Condition');
             await medicosService.addMedico(Params);
             stResponse.message = "Se ha enviado la solicitud, espere confirmacion"
             stResponse.success = true;

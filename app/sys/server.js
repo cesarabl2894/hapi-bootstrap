@@ -2,7 +2,7 @@
 
 require('./fw');
 // if(process.env === 'development'){
-    // require('dotenv').config();
+    require('dotenv').config();
 // }
 
 const Hapi  = require('hapi');
@@ -47,6 +47,9 @@ function getPlugins() {
 async function start(){
 
     console.log('Starting...');
+    process.on('unhandledRejection', error => {
+        console.log('unhandledRejection', error);
+    });
 
     try 
     {        
@@ -56,15 +59,11 @@ async function start(){
         const routes = getRoutes();
         for(let route of routes)
             server.route(route);
-        
-        fw.Handlebars = require('handlebars');
-        
+                
         // Start server
         await server.start();
         console.log(`Server is running on ${server.info.uri}`);
         console.log(`Enviroment: ${process.env.NODE_ENV || 'development'}`);
-        const SQL = `SELECT * FROM departamentos`;
-        console.log(fw.db.execute('local',SQL,[]));
     }
     catch(error){
         console.error(error);

@@ -1,19 +1,18 @@
 const authService = fw.getService('auth');
 
-async function validateAuth(request,h){
-    return fw.promise(async (resolve, reject) =>  {
-        let stResponse = { success: true, message: ''};
-        
+async function validateAuth(request, h) {
+    return fw.promise(async (resolve, reject) => {
+        let stResponse = { success: true, message: '' };
+
         stResponse.data = await authService.checkAuth(request.payload);
-        // console.log(stResponse.data);
-        if(fw.boom.isBoom(stResponse.data))
+        if (fw.boom.isBoom(stResponse.data))
             resolve(stResponse.data);
-        
+
         resolve(stResponse);
     });
 }
 
-module.exports = 
-{
-    validateAuth
-}
+module.exports =
+    {
+        validateAuth
+    }

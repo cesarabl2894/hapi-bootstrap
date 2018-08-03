@@ -6,7 +6,6 @@ function getDepartments(){
 }
 
 async function getcitybydept(deptid){
-
         const SQL = `SELECT idciudad, nombre FROM ciudades WHERE iddepartamento = ?;`;
         return  await fw.db.execute('local',SQL,[deptid]);
 }

@@ -1,5 +1,5 @@
 {
-  "name": "hapitest",
+  "name": "Medilocation",
   "version": "0.1.0",
   "description": "This is a Hapi Structure for API enpoints, this project was forked , and the creator of the Structure is Mario Nuñez, mar-hn",
   "engines": {
