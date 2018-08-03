@@ -1,5 +1,5 @@
 async function getPacientebyId(pacienteid) {
-    const SQL = `SELECT  idpaciente, pacientes.nombre, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
+    const SQL = `SELECT  idpaciente, pacientes.nombre AS nombrepac, paciente.apellido, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
     ciudadid , ciudades.nombre AS nombreciudad
     FROM pacientes 
     INNER JOIN departamentos 
@@ -50,8 +50,22 @@ async function updatePaciente(data) {
         data.idpaciente
     ])
 }
+
+async function getPacientebyEmail(email) {
+    const SQL = `SELECT  pacientes.idpaciente,pacientes.nombre AS nombrepac, pacientes.apellido, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
+    ciudadid , ciudades.nombre AS nombreciudad
+    FROM pacientes 
+    INNER JOIN departamentos 
+    ON  departamentos.iddepartamento = pacientes.departamentoid 
+    INNER JOIN ciudades 
+    ON ciudades.idciudad = pacientes.ciudadid
+    WHERE pacientes.email = ?`;
+
+    return await fw.db.execute('local', SQL, [email]);
+}
 module.exports = {
     getPacientebyId,
     addPaciente,
-    updatePaciente
+    updatePaciente,
+    getPacientebyEmail
 }

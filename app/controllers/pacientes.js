@@ -78,8 +78,15 @@ function updatePaciente(request, h) {
 
 }
 
+function getPacientebyEmail(request, h) {
+    return fw.promise(async (resolve, reject) => {
+        resolve(pacientesService.getPacientebyEmail(request.params.email))
+    })
+}
+
 module.exports = {
     getPacientebyId,
     addPaciente,
-    updatePaciente
+    updatePaciente,
+    getPacientebyEmail
 }

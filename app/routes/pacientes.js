@@ -3,7 +3,7 @@ const pacientesCtrl = fw.getController('pacientes');
 module.exports = [
     {
         method: 'GET',
-        path: '/pacientes/{pacienteid}/',
+        path: '/pacientes/{pacienteid}',
         options: {
             handler: pacientesCtrl.getPacientebyId,
             tags: ['api'],
@@ -59,5 +59,19 @@ module.exports = [
                 }
             }
         }
-    }
+    },
+    {
+        method: 'GET',
+        path: '/pacientes/correo/{email}',
+        options: {
+            handler: pacientesCtrl.getPacientebyEmail,
+            tags: ['api'],
+            auth: 'jwt',
+            validate: {
+                params: {
+                    email: fw.param.string().email().required()
+                }
+            }
+        }
+    },
 ]

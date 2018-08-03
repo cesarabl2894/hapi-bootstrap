@@ -11,7 +11,7 @@ module.exports =
         } 
     },
     {
-        method: "GET", path: '/ciudades/{deptid}/',
+        method: "GET", path: '/ciudades/{deptid}',
         options:{
             handler: locationCtrl.getcitybydept,
             auth: 'jwt',

@@ -10,9 +10,13 @@ async function addPaciente(data){
 async function updatePaciente(data){
     return await pacientesDAO.updatePaciente(data);
 }
+async function getPacientebyEmail(email){
+    return await pacientesDAO.getPacientebyEmail(email);
+}
 
 module.exports = {
     getPacientebyId,
     addPaciente,
-    updatePaciente
+    updatePaciente,
+    getPacientebyEmail
 }

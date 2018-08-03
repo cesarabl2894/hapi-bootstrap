@@ -70,7 +70,7 @@ module.exports =
         }
     },
     { 
-        method: 'DELETE', path: '/medicos/deleteMedico/', 
+        method: 'DELETE', path: '/medicos/deleteMedico', 
           options: { 
             handler: medicosctr.deleteMedico, 
             tags: ['api'],
@@ -86,7 +86,7 @@ module.exports =
     },
     {
         method: 'GET',
-        path: '/medicos/{espid}/{deptid}/{ciudadid}/',
+        path: '/medicos/{espid}/{deptid}/{ciudadid}',
         options: {
             handler: medicosctr.medicosbyHospital,
             tags: ['api'],
