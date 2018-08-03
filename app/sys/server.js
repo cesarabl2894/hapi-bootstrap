@@ -5,8 +5,8 @@ require('dotenv').config();
 const Hapi  = require('hapi');
 
 const server = new Hapi.Server({
-    port: process.env.PORT || 3030,
-    host: process.env.HOST || 'localhost',
+    port: process.env.PORT ,
+    host: process.env.HOST ,
     routes: 
     {
         cors: true 
