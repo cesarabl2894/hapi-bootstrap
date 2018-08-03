@@ -1,9 +1,9 @@
 'use strict';
 
 require('./fw');
-if(process.env === 'development'){
-    require('dotenv').config();
-}
+// if(process.env === 'development'){
+//     require('dotenv').config();
+// }
 
 const Hapi  = require('hapi');
 
