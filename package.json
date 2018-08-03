@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon ./app/sys/server.js",
     "startdev": "nodemon  ./app/sys/server.js",
-    "startdebug" : "nodemon --inspect-brk ./app/sys/server.js",
+    "startdebug": "nodemon --inspect-brk ./app/sys/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Cesar Bonel",
@@ -36,6 +36,7 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "mysql": "^2.15.0",
+    "nodemon": "^1.18.3",
     "oracledb": "^2.2.0",
     "promise-mysql": "^3.2.1",
     "simple-oracledb": "^1.1.90",
