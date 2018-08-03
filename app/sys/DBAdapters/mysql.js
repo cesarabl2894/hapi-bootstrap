@@ -10,10 +10,10 @@ class mysqlAdapter {
     async createConnection() {
         return await this.mysql.createConnection
         ({
-            host: this.dbconfig.SERVER,
-            user: this.dbconfig.USERNAME,
-            password: this.dbconfig.PASSWORD,
-            database: this.dbconfig.DATABASE
+            host: process.env.MYSQL_SERVER,
+            user:  process.env.MYSQL_USERNAME,
+            password:  process.env.MYSQL_PASS,
+            database:  process.env.MYSQL_DB
         });
     }
 
