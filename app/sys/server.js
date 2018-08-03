@@ -1,7 +1,7 @@
 'use strict';
 
 require('./fw');
-// require('dotenv').config();
+require('dotenv').config();
 const Hapi  = require('hapi');
 
 const server = new Hapi.Server({
