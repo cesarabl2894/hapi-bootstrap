@@ -65,6 +65,7 @@ async function deleteMedico(medicoId){
     return await fw.db.execute('local',SQL,[medicoId]);
 }
 async function medicosbyHospital(data){
+    console.log(data);
     const SQL =`
     SELECT medicos.nombre AS nombreMedico, medicos.apellido ,
     especialidades.nombre_especialidad as nombreEspecialidad,
@@ -83,8 +84,8 @@ async function medicosbyHospital(data){
     AND medicos.estado = 'activo';`;
 
     return await fw.db.execute('local',SQL,[
-        data.idespecialidad,
-        data.departamentoid,
+        data.espeid,
+        data.deptid,
         data.ciudadid
     ])
 
