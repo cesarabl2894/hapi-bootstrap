@@ -84,7 +84,7 @@ async function medicosbyHospital(data){
     AND medicos.estado = 'activo';`;
 
     return await fw.db.execute('local',SQL,[
-        data.espeid,
+        data.espid,
         data.deptid,
         data.ciudadid
     ])
