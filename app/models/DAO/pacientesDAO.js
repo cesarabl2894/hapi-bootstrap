@@ -1,5 +1,5 @@
 async function getPacientebyId(pacienteid) {
-    const SQL = `SELECT  idpaciente, pacientes.nombre AS nombrepac, paciente.apellido, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
+    const SQL = `SELECT  idpaciente, pacientes.nombre AS nombrepac, pacientes.apellido, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
     ciudadid , ciudades.nombre AS nombreciudad
     FROM pacientes 
     INNER JOIN departamentos 
