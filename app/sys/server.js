@@ -63,6 +63,8 @@ async function start(){
         await server.start();
         console.log(`Server is running on ${server.info.uri}`);
         console.log(`Enviroment: ${process.env.NODE_ENV || 'development'}`);
+        const SQL = `SELECT * FROM departamentos`;
+        console.log(fw.db.execute('local',SQL,[]));
     }
     catch(error){
         console.error(error);
