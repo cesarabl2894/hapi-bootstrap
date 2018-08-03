@@ -1,14 +1,14 @@
 'use strict';
 
 require('./fw');
-if(process.env === 'development'){
-    require('dotenv').config();
-}
+require('dotenv').config();
+
 
 const Hapi  = require('hapi');
 
 const server = new Hapi.Server({
     port: process.env.PORT ,
+    host: process.env.HOST  ,
     routes: 
     {
         cors: true 
