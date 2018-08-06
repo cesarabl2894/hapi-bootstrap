@@ -33,11 +33,18 @@ function deleteMedico(medicoId){
         resolve(medicosDAO.deleteMedico(medicoId));
     })
 }
+
+function getEspecialidades(medicoId){
+    return fw.promise(async (resolve,reject)=>{
+        resolve(medicosDAO.getEspecialidades());
+    })
+}
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
     addMedico,
     updateMedico,
     deleteMedico,
-    medicosbyHospital
+    medicosbyHospital,
+    getEspecialidades
 }

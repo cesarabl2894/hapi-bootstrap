@@ -90,6 +90,11 @@ async function medicosbyHospital(data){
     ])
 
 }
+async function getEspecialidades() {
+    const SQL = `SELECT * FROM especialidades;`;
+
+    return await fw.db.execute('local', SQL, []);
+}
 
 module.exports = {
     getMedicosByEsp,
@@ -97,5 +102,6 @@ module.exports = {
     addMedico,
     updateMedico,
     deleteMedico,
-    medicosbyHospital
+    medicosbyHospital,
+    getEspecialidades
 }

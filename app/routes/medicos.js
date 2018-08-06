@@ -98,5 +98,12 @@ module.exports =
                 }
             }
         }
-    }
+    },
+    {
+        method: 'GET', path: '/especialidades', 
+        options: { 
+            handler: medicosctr.getEspecialidades,
+            tags: ['api']
+        } 
+    },
 ];

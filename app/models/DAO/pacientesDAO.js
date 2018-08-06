@@ -64,9 +64,11 @@ async function getPacientebyEmail(email) {
 
     return await fw.db.execute('local', SQL, [email]);
 }
+
 module.exports = {
     getPacientebyId,
     addPaciente,
     updatePaciente,
     getPacientebyEmail
+    
 }

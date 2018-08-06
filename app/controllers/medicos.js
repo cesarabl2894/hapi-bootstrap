@@ -109,11 +109,18 @@ function medicosbyHospital(request, h ){
     });
 
 }
+
+function getEspecialidades(request,header){
+    return fw.promise(async (resolve, reject) =>{
+        resolve(medicosService.getEspecialidades());
+    })
+}
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
     addMedico,
     updateMedico,
     deleteMedico,
-    medicosbyHospital
+    medicosbyHospital,
+    getEspecialidades
 }
