@@ -39,7 +39,7 @@ function getUserbyEmail(email){
 function addUser(data){
     return fw.promise(async (resolve,reject) => {
         const SQL = 
-        `INSERT INTO users(username, email,password,Salt,usertypeid)
+        `INSERT INTO Users(username, email,password,Salt,usertypeid)
         VALUES (?,?,?,?,?);`;
         resolve(await fw.db.execute('local',SQL,
         [
@@ -80,7 +80,7 @@ function deleteUser(email){
     return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
-        `DELETE FROM users
+        `DELETE FROM Users
         WHERE email = ?`;
         resolve(await fw.db.execute('local',SQL,[email]));
     });

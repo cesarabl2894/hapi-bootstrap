@@ -12,6 +12,7 @@ async function getPacientebyId(pacienteid) {
 }
 
 async function addPaciente(data) {
+    console.log(data);
     const SQL = `INSERT INTO medilocation.pacientes (nombre, apellido, email, sexo, direccion, departamentoid, ciudadid,username,fechanac)
     VALUES (?,?,?,?,?,?,?,?,?);`;
     return await fw.db.execute('local', SQL, [

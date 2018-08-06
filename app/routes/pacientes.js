@@ -21,7 +21,6 @@ module.exports = [
         options: {
             handler: pacientesCtrl.addPaciente,
             tags: ['api'],
-            auth: 'jwt',
             validate: {
                 payload:{
                     nombre: fw.param.string().required(),
