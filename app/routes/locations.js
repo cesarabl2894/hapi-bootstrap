@@ -6,7 +6,6 @@ module.exports =
         method: 'GET', path: '/departamentos', 
         options: { 
             handler: locationCtrl.getDepartments,
-            auth: 'jwt',
             tags: ['api'],
         } 
     },
@@ -14,7 +13,6 @@ module.exports =
         method: "GET", path: '/ciudades/{deptid}',
         options:{
             handler: locationCtrl.getcitybydept,
-            auth: 'jwt',
             tags: ['api'],
             validate:{
                 params: {
