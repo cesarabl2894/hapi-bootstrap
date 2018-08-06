@@ -47,9 +47,12 @@ function addMedico(request, h){
             stResponse.success = true;
             resolve(stResponse);                    
         }
-        stResponse.message = "Medico Registrado con correo Electronico"
-        stResponse.success = false;
-        resolve(stResponse);  
+        else{
+            stResponse.message = "Medico Registrado con correo Electronico"
+            stResponse.success = false;
+            resolve(stResponse);
+        }
+          
     })
 }
 

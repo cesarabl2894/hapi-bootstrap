@@ -44,9 +44,12 @@ function addPaciente(request, h) {
             stResponse.success = true;
             resolve(stResponse);
         }
-        stResponse.message = "Paciente registrado con Correo Electronico"
-        stResponse.success = false;
-        resolve(stResponse);
+        else{
+            stResponse.message = "Paciente registrado con Correo Electronico"
+            stResponse.success = false;
+            resolve(stResponse);
+        }
+        
     })
 }
 function updatePaciente(request, h) {
