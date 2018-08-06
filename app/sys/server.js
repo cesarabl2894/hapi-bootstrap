@@ -46,10 +46,10 @@ function getPlugins() {
 
 async function start(){
 
-    // console.log('Starting...');
-    // process.on('unhandledRejection', error => {
-    //     console.log('unhandledRejection', error);
-    // });
+    console.log('Starting...');
+    process.on('unhandledRejection', error => {
+        console.log('unhandledRejection', error);
+    });
 
     try 
     {        
