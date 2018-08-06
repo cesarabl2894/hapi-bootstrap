@@ -87,7 +87,7 @@ function deleteUser(email){
 }
 function updatePassword(data){
     return fw.promise(async (resolve,reject) => {
-        const SQL = `UPDATE medilocation.Users SET Salt = ?, password = ?  WHERE email = ?`;
+        const SQL = `UPDATE Users SET Salt = ?, password = ?  WHERE email = ?`;
         resolve(await fw.db.execute('local',SQL,[data.Salt, data.password,data.email]))
     })
 }

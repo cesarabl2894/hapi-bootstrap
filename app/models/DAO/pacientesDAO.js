@@ -13,7 +13,7 @@ async function getPacientebyId(pacienteid) {
 
 async function addPaciente(data) {
     console.log(data);
-    const SQL = `INSERT INTO medilocation.pacientes (nombre, apellido, email, sexo, direccion, departamentoid, ciudadid,username,fechanac)
+    const SQL = `INSERT INTO pacientes (nombre, apellido, email, sexo, direccion, departamentoid, ciudadid,username,fechanac)
     VALUES (?,?,?,?,?,?,?,?,?);`;
     return await fw.db.execute('local', SQL, [
         data.nombre,
@@ -30,7 +30,7 @@ async function addPaciente(data) {
 
 async function updatePaciente(data) {
     const SQL = `
-    UPDATE medilocation.pacientes
+    UPDATE pacientes
     SET pacientes.nombre = ?,
     pacientes.apellido = ?,
     pacientes.sexo = ?,
@@ -53,7 +53,7 @@ async function updatePaciente(data) {
 }
 
 async function getPacientebyEmail(email) {
-    const SQL = `SELECT  pacientes.idpaciente,pacientes.nombre AS nombrepac, pacientes.apellido, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
+    const SQL = `SELECT idpaciente,pacientes.nombre AS nombrepac, pacientes.apellido, sexo, direccion , departamentos.iddepartamento, departamentos.nombre,
     ciudadid , ciudades.nombre AS nombreciudad
     FROM pacientes 
     INNER JOIN departamentos 

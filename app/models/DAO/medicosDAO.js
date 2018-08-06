@@ -10,14 +10,14 @@ function getMedicosByEsp(especialidadID){
 function getMedicobyId(medicoId){
     return fw.promise(async (resolve, reject) =>{
         const SQL = 
-        `SELECT * FROM medilocation.medicos WHERE medicos.idmedico = ? `;
+        `SELECT * FROM medicos WHERE medicos.idmedico = ? `;
         resolve(await fw.db.execute('local',SQL,[medicoId]));
     });
 }
 
 
 async function addMedico(data){
-    const SQL = `INSERT INTO medilocation.medicos (nombre, apellido, direccion,sexo,telefono,idespecialidad,email,estado,username)
+    const SQL = `INSERT INTO medicos (nombre, apellido, direccion,sexo,telefono,idespecialidad,email,estado,username)
     VALUES (?,?,?,?,?,?,?,?,?);`;
     return await fw.db.execute('local',SQL,[
         data.nombre,
@@ -36,7 +36,7 @@ async function addMedico(data){
 
 async function updateMedico(data){
     const SQL = `
-    UPDATE medilocation.medicos
+    UPDATE medicos
     SET medicos.nombre = ?,
     medicos.apellido = ?,
     medicos.direccion = ?,
@@ -60,14 +60,14 @@ async function updateMedico(data){
 
 async function deleteMedico(medicoId){
     const SQL =
-    `DELETE FROM medilocation.medicos 
+    `DELETE FROM medicos 
     WHERE medicos.idmedico = ? `;
     return await fw.db.execute('local',SQL,[medicoId]);
 }
 async function medicosbyHospital(data){
     console.log(data);
     const SQL =`
-    SELECT medicos.nombre AS nombreMedico, medicos.apellido ,
+    SELECT nombre AS nombreMedico, medicos.apellido ,
     especialidades.nombre_especialidad as nombreEspecialidad,
     hospitales.nombre_hospital AS nombreHospital,
     detalle_hospital_medico.disponibilidad AS disponibilidad
