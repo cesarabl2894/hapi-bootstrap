@@ -112,11 +112,12 @@ async function buscarCitasMedico(medicoId){
 async function buscarCitasMedico(medicoid){
     console.log(medicoid);
     const SQL =`
-        SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
+        SELECT consultas.descripcion, fechaconsulta , pacientes.nombre AS nombrepac , 
         pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
         medicos.apellido AS apellidomedico, consultas.estado,
-        especialidades.nombre_especialidad as nombreespecialidad,
-        hospitales.nombre_hospital AS nombrehospital
+        especialidades.nombre_especialidad AS nombreespecialidad,
+        hospitales.nombre_hospital AS nombrehospital,
+        detalle_hospital_medico.disponibilidad AS medicodisponibilidad
         FROM consultas 
         INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
         INNER JOIN medicos on consultas.idmedico = medicos.idmedico
@@ -126,18 +127,19 @@ async function buscarCitasMedico(medicoid){
         ON hospitales.idhospital = detalle_hospital_medico.idhospital
         INNER JOIN especialidades
         ON especialidades.idespecialidad = medicos.idespecialidad
-        WHERE medicos.idmedico = ?;`;
+        WHERE medicos.idmedico = ?`;
     return await fw.db.execute('local',SQL,[medicoid]);
 }
 
 async function buscarCitasPaciente(pacienteid){
     console.log(pacienteid);
     const SQL = `
-        SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
+        SELECT consultas.descripcion, fechaconsulta , pacientes.nombre AS nombrepac , 
         pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
         medicos.apellido AS apellidomedico, consultas.estado,
-        especialidades.nombre_especialidad as nombreespecialidad,
-        hospitales.nombre_hospital AS nombrehospital
+        especialidades.nombre_especialidad AS nombreespecialidad,
+        hospitales.nombre_hospital AS nombrehospital,
+        detalle_hospital_medico.disponibilidad AS medicodisponibilidad
         FROM consultas 
         INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
         INNER JOIN medicos on consultas.idmedico = medicos.idmedico
