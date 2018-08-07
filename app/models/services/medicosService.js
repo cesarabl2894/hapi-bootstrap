@@ -50,6 +50,11 @@ function buscarCitasMedico(medicoid){
         resolve(medicosDAO.buscarCitasMedico(medicoid));
     })
 }
+function reservarCita(data){
+    return fw.promise(async (resolve,reject)=>{
+        resolve(medicosDAO.reservarCita(data));
+    })
+}
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
@@ -59,5 +64,6 @@ module.exports = {
     medicosbyHospital,
     getEspecialidades,
     buscarCitasMedico,
-    buscarCitasPaciente
+    buscarCitasPaciente,
+    reservarCita
 }

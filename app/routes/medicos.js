@@ -130,4 +130,21 @@ module.exports =
             }
         } 
     },
+    {
+        method: 'POST',
+        path: '/consultas/reservar',
+        options:{
+            handler: medicosctr.reservarCita,
+            tags: ['api'],
+            validate:{
+                payload:{
+                    idpaciente: fw.param.number().integer().required(),
+                    idmedico: fw.param.number().integer().required(),
+                    descripcion: fw.param.string().required(),
+                    fechaconsulta: fw.param.string().required(),
+                    estado: fw.param.string().required(),
+                }
+            }
+        }
+    },
 ];

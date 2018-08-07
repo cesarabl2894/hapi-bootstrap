@@ -134,6 +134,21 @@ async function buscarCitasPaciente(pacienteid){
         WHERE pacientes.idpaciente = ?;`
         return await fw.db.execute('local',SQL,[pacienteid]);
 }
+
+async function reservarCita(data){
+    console.log(data);
+    const SQL = `
+    INSERT INTO consultas(idpaciente,idmedico,descripcion,fechaconsulta,estado)
+    VALUE(?,?,?,?,?); `;
+    return await fw.db.execute('local',SQL,[
+        data.idpaciente,
+        data.idmedico,
+        data.descripcion,
+        data.fechaconsulta,
+        data.estado
+    ])
+
+}
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
@@ -143,5 +158,6 @@ module.exports = {
     medicosbyHospital,
     getEspecialidades,
     buscarCitasMedico,
-    buscarCitasPaciente
+    buscarCitasPaciente,
+    reservarCita
 }

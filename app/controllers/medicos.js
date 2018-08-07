@@ -126,6 +126,26 @@ function buscarCitasPaciente(request,header){
     })
 }
 
+function reservarCita(request,header){
+    return fw.promise(async (resolve,reject)=>{
+        let stResponse = {success:false,message:''};
+      
+        const Params = {
+            idpaciente: request.payload.idpaciente,
+            idmedico: request.payload.idmedico,
+            descripcion: request.payload.descripcion,
+            fechaconsulta: request.payload.fechaconsulta,
+            estado: request.payload.estado                        
+        };
+        console.log(Params);
+        await medicosService.reservarCita(Params);
+        stResponse.message = 'Se ha reservado la cita'; 
+        stResponse.success = true;
+        resolve(stResponse); 
+        
+    })
+}
+
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
@@ -135,5 +155,6 @@ module.exports = {
     medicosbyHospital,
     getEspecialidades,
     buscarCitasPaciente,
-    buscarCitasMedico
+    buscarCitasMedico,
+    reservarCita
 }
