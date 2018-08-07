@@ -106,4 +106,28 @@ module.exports =
             tags: ['api']
         } 
     },
+    {
+        method: 'GET', path: '/consultas/medico/{medicoid}', 
+        options: { 
+            handler: medicosctr.buscarCitasMedico,
+            tags: ['api'],
+            validate: {
+                params: {
+                    medicoid: fw.param.number().integer().required()
+                }
+            }
+        } 
+    },
+    {
+        method: 'GET', path: '/consultas/paciente/{pacienteid}', 
+        options: { 
+            handler: medicosctr.buscarCitasPaciente,
+            tags: ['api'],
+            validate: {
+                params: {
+                    pacienteid: fw.param.number().integer().required()
+                }
+            }
+        } 
+    },
 ];

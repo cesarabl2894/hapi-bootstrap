@@ -115,6 +115,17 @@ function getEspecialidades(request,header){
         resolve(medicosService.getEspecialidades());
     })
 }
+function buscarCitasMedico(request,header){
+    return fw.promise(async (resolve, reject) =>{
+        resolve(medicosService.buscarCitasMedico(request.params.medicoid));
+    })
+}
+function buscarCitasPaciente(request,header){
+    return fw.promise(async (resolve, reject) =>{
+        resolve(medicosService.buscarCitasPaciente(request.params.pacienteid));
+    })
+}
+
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
@@ -122,5 +133,7 @@ module.exports = {
     updateMedico,
     deleteMedico,
     medicosbyHospital,
-    getEspecialidades
+    getEspecialidades,
+    buscarCitasPaciente,
+    buscarCitasMedico
 }

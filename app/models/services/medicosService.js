@@ -39,6 +39,17 @@ function getEspecialidades(medicoId){
         resolve(medicosDAO.getEspecialidades());
     })
 }
+function buscarCitasPaciente(pacienteid){
+    console.log(pacienteid);
+    return fw.promise(async (resolve,reject)=>{
+        resolve(medicosDAO.buscarCitasPaciente(pacienteid));
+    })
+}
+function buscarCitasMedico(medicoid){
+    return fw.promise(async (resolve,reject)=>{
+        resolve(medicosDAO.buscarCitasMedico(medicoid));
+    })
+}
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
@@ -46,5 +57,7 @@ module.exports = {
     updateMedico,
     deleteMedico,
     medicosbyHospital,
-    getEspecialidades
+    getEspecialidades,
+    buscarCitasMedico,
+    buscarCitasPaciente
 }

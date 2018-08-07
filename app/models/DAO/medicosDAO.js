@@ -70,7 +70,8 @@ async function medicosbyHospital(data){
     SELECT nombre AS nombreMedico, medicos.apellido ,
     especialidades.nombre_especialidad as nombreEspecialidad,
     hospitales.nombre_hospital AS nombreHospital,
-    detalle_hospital_medico.disponibilidad AS disponibilidad
+    detalle_hospital_medico.disponibilidad AS disponibilidad,
+    hospitales.mapastring
     FROM medicos
     INNER JOIN detalle_hospital_medico
     ON medicos.idmedico = detalle_hospital_medico.idmedico
@@ -96,6 +97,43 @@ async function getEspecialidades() {
     return await fw.db.execute('local', SQL, []);
 }
 
+async function buscarCitasMedico(medicoId){
+    const SQL =
+    `SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
+    pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
+    medicos.apellido as apellidomedico, consultas.estado
+    FROM consultas 
+    INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
+    INNER JOIN medicos on consultas.idmedico = medicos.idmedico
+    WHERE medicos.idmedico = ?;`;
+    return await fw.db.execute('local',SQL,[medicoId]);
+}
+
+async function buscarCitasMedico(medicoid){
+    console.log(medicoid);
+    const SQL =
+    `SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
+    pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
+    medicos.apellido as apellidomedico, consultas.estado
+    FROM consultas 
+    INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
+    INNER JOIN medicos on consultas.idmedico = medicos.idmedico
+    WHERE medicos.idmedico = ?;`;
+    return await fw.db.execute('local',SQL,[medicoid]);
+}
+
+async function buscarCitasPaciente(pacienteid){
+    console.log(pacienteid);
+    const SQL = `
+        SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
+        pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
+        medicos.apellido as apellidomedico, consultas.estado
+        FROM consultas 
+        INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
+        INNER JOIN medicos on consultas.idmedico = medicos.idmedico
+        WHERE pacientes.idpaciente = ?;`
+        return await fw.db.execute('local',SQL,[pacienteid]);
+}
 module.exports = {
     getMedicosByEsp,
     getMedicobyId,
@@ -103,5 +141,7 @@ module.exports = {
     updateMedico,
     deleteMedico,
     medicosbyHospital,
-    getEspecialidades
+    getEspecialidades,
+    buscarCitasMedico,
+    buscarCitasPaciente
 }
