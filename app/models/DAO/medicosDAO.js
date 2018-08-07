@@ -111,14 +111,22 @@ async function buscarCitasMedico(medicoId){
 
 async function buscarCitasMedico(medicoid){
     console.log(medicoid);
-    const SQL =
-    `SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
-    pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
-    medicos.apellido as apellidomedico, consultas.estado
-    FROM consultas 
-    INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
-    INNER JOIN medicos on consultas.idmedico = medicos.idmedico
-    WHERE medicos.idmedico = ?;`;
+    const SQL =`
+        SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
+        pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
+        medicos.apellido AS apellidomedico, consultas.estado,
+        especialidades.nombre_especialidad as nombreespecialidad,
+        hospitales.nombre_hospital AS nombrehospital
+        FROM consultas 
+        INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
+        INNER JOIN medicos on consultas.idmedico = medicos.idmedico
+        INNER JOIN detalle_hospital_medico
+        ON detalle_hospital_medico.idmedico = medicos.idmedico
+        INNER JOIN hospitales
+        ON hospitales.idhospital = detalle_hospital_medico.idhospital
+        INNER JOIN especialidades
+        ON especialidades.idespecialidad = medicos.idespecialidad
+        WHERE medicos.idmedico = ?;`;
     return await fw.db.execute('local',SQL,[medicoid]);
 }
 
@@ -127,10 +135,18 @@ async function buscarCitasPaciente(pacienteid){
     const SQL = `
         SELECT consultas.descripcion, fechaconsulta , pacientes.nombre as nombrepac , 
         pacientes.apellido AS pacienteapellido, medicos.nombre AS nombremedico,
-        medicos.apellido as apellidomedico, consultas.estado
+        medicos.apellido AS apellidomedico, consultas.estado,
+        especialidades.nombre_especialidad as nombreespecialidad,
+        hospitales.nombre_hospital AS nombrehospital
         FROM consultas 
         INNER JOIN pacientes ON  pacientes.idpaciente = consultas.idpaciente
         INNER JOIN medicos on consultas.idmedico = medicos.idmedico
+        INNER JOIN detalle_hospital_medico
+        ON detalle_hospital_medico.idmedico = medicos.idmedico
+        INNER JOIN hospitales
+        ON hospitales.idhospital = detalle_hospital_medico.idhospital
+        INNER JOIN especialidades
+        ON especialidades.idespecialidad = medicos.idespecialidad
         WHERE pacientes.idpaciente = ?;`
         return await fw.db.execute('local',SQL,[pacienteid]);
 }
